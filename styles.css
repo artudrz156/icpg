@@ -10,6 +10,11 @@ h1 {
 	margin: 20px 0px 10px 20px;
 }
 
+h2 {
+	margin: 20px 0px 10px 20px;
+	color: #E0E0EA;
+}
+
 ul , ul li {
 	margin-left: 0px;
 	
@@ -107,12 +112,10 @@ input[type="email"]:{
 
 #menu {
 	float: left;
-	width: 140px;
+	width: 20%;
 	height: auto;
 	color: #221526;
-	padding-right: 50px;
 	overflow: hidden;
-	border-right: 1px solid #396A92;
 }
 
 #menu ul, ul li {
@@ -124,7 +127,7 @@ input[type="email"]:{
 
 #menu ul a:link, ul a:visited {	
 	text-decoration: none;
-	background-color: #396A92;
+	background-color: #E0E0EA;
 	display: block;
 	margin: 1px;	
 	font-family: sans-serif;
@@ -133,13 +136,13 @@ input[type="email"]:{
 	box-shadow: none;
 	border-radius: none;  
 	padding: 15px;
-	color: #E0E0EA;
+	color: #221526;
 }
 
 #menu ul a:hover {
-	background-color: #E0E0EA;
+	background-color: #396A92;
 	transition: box-shadow 0.3s, background-color 0.3s;
-	color: #221526;
+	color: #E0E0EA;
 }
 
 #zdjecie {

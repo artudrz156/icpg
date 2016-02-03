@@ -40,8 +40,8 @@
 			</div>
 			<div id="zawartosc">
 				<div id="menu">
+					<h2>MENU</h2>
 					<ul>
-						<li><a href='index.php'>Strona główna</a></li>
 						<?php	
 							if ($foldery = opendir('zdjecia/')) {
 								while (($dir = readdir($foldery))!=false) { 
@@ -61,20 +61,21 @@
 					$A = null;
 					if (isset($_GET['name'])) {
 						$A = $_GET['name'];
-					}
-					if ($obrazy = opendir('zdjecia/'.$A.'/')) {
-						while (($plik = readdir($obrazy))!= false) {
-							if(ereg(".gif$|.jpg$", $plik)) {		
-								echo "<a href='zdjecia/$A/$plik' data-lightbox='$A'> 
-									<div id='zdjecie' class='nailthumb-container square-thumb'>
-										<img src='zdjecia/$A/$plik' />
-									</div>
-								</a>";
-							}	
+					
+						echo "<h2>$A</h2>";										
+						if ($obrazy = opendir('zdjecia/'.$A.'/')) {
+							while (($plik = readdir($obrazy))!= false) {
+								if(ereg(".gif$|.jpg$", $plik)) {		
+									echo "<a href='zdjecia/$A/$plik' data-lightbox='$A'> 
+										<div id='zdjecie' class='nailthumb-container square-thumb'>
+											<img src='zdjecia/$A/$plik' />
+										</div>
+									</a>";
+								}	
+							}
+							closedir($obrazy);	
 						}
-						closedir($obrazy);	
-					}
-									
+					}			
 				?>
 				</div>
 			</div>
