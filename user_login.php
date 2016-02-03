@@ -1,20 +1,18 @@
 <?php
 	session_start();
+	include_once 'dbconnect.php';
 	$message="";
 	if(count($_POST)>0) {
 		$username=$_POST["username"];
 		$password=$_POST["password"];
-		$conn = mysqli_connect("localhost",$username,$password,"nsgz");
-		if (mysqli_connect_errno())
-		{
-			echo "Failed to connect to database: " . mysqli_connect_error();
-		}		
+		
 		$sql="SELECT * FROM login WHERE username='".$username."' and password='".$password."'";
-		$result = mysqli_query($conn, $sql);
+		$result = mysqli_query($con, $sql);
 		$row  = mysqli_fetch_array($result);
 		if(is_array($row)) {
 			$_SESSION["id"] = $row['id'];
 			$_SESSION["username"] = $row['username'];
+			$_SESSION["password"] = $row['password'];
 		} else {
 			$message = "Invalid Username or Password!";
 		}
@@ -25,28 +23,22 @@
 ?>
 <html>
 	<head>
-		<title>User Login</title>
+		<title>Login</title>
 		<link rel="stylesheet" type="text/css" href="styles.css" />
 	</head>
 	<body>
 		<form name="frmUser" method="post" action="">
-			<div class="message"><?php if($message!="") { echo $message; } ?></div>
-			<table border="0" cellpadding="10" cellspacing="1" width="500" align="center">
-				<tr class="tableheader">
-					<td align="center" colspan="2">Enter Login Details</td>
-				</tr>
-				<tr class="tablerow">
-					<td align="right">Username</td>
-					<td><input type="text" name="username"></td>
-				</tr>
-				<tr class="tablerow">
-					<td align="right">Password</td>
-					<td><input type="password" name="password"></td>
-				</tr>
-				<tr class="tableheader">
-					<td align="center" colspan="2"><input type="submit" name="submit" value="Submit"></td>
-				</tr>
-			</table>
+			<div class="loginform input-list style-1 clearfix">
+				<h2>Login</h2>
+
+				<input type="text" placeholder="Login" name="username" required/>	
+				<input type="password" placeholder="Password" name="password" required/>
+				<p>
+					<input type="submit" name="loginButton" value="Login" />
+				</p>
+				<span><a href="register.php">Register</a></span>
+			</div>
+			
 		</form>
 	</body>
 </html>

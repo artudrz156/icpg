@@ -5,16 +5,14 @@
 	<head>
 		<title>User Login</title>
 		<link rel="stylesheet" type="text/css" href="styles.css" />
-		<link rel="stylesheet" href="lightbox.css" type="text/css" media="screen" />
-
-		<script type="text/javascript" src="jquery-ui/development-bundle/jquery-1.4.4.js"></script>
-		<script type="text/javascript" src="nailthumb/jquery.nailthumb.1.1.js"></script>
-		<link href="nailthumb/jquery.nailthumb.1.1.css" type="text/css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/lightbox.css" type="text/css" media="screen" />
+		<link href="nailthumb/jquery.nailthumb.1.1.css" type="text/css" rel="stylesheet" />		
 		
+		<script type="text/javascript" src="js/jquery-2.2.0.min.js"></script>
+		<script type="text/javascript" src="nailthumb/jquery.nailthumb.1.1.js"></script>		
 		<script type="text/javascript" src="js/prototype.js"></script>
 		<script type="text/javascript" src="js/scriptaculous.js?load=effects,builder"></script>
-		<script type="text/javascript" src="js/lightbox.js"></script>
-		
+				
 		<script type="text/javascript">
         jQuery(document).ready(function() {
             jQuery('.nailthumb-container').nailthumb({width:200,height:200});
@@ -22,8 +20,7 @@
 		</script>
 	</head>
 	<body>
-		<div id="main-user-gallery">
-			
+		<div id="main-user-gallery">			
 			<div id="user-details">
 				<?php
 					if($_SESSION["username"]) {
@@ -34,6 +31,14 @@
 				?>
 			</div>
 			<div id="top">
+				
+				<div id="header">				
+					<div id="mainHeader">
+						<h1>Gallery</h1>
+					</div>				
+				</div>
+			</div>
+			<div id="zawartosc">
 				<div id="menu">
 					<ul>
 						<li><a href='index.php'>Strona główna</a></li>
@@ -57,13 +62,6 @@
 						<li><a href='index.php'>Strona główna</a></li>
 					</ul>
 				</div>
-				<div id="header">				
-					<div id="mainHeader">
-						<h1>Incredible Complicated User Gallery</h1>
-					</div>				
-				</div>
-			</div>
-			<div id="zawartosc">
 				<div id="center-zawartosc">
 				<?php
 					$A = null;
@@ -73,7 +71,7 @@
 					if ($obrazy = opendir('zdjecia/'.$A.'/')) {
 						while (($plik = readdir($obrazy))!= false) {
 							if(ereg(".gif$|.jpg$", $plik)) {		
-								echo "<a href='zdjecia/$A/$plik' rel='lightbox[]'> 
+								echo "<a href='zdjecia/$A/$plik' data-lightbox='$A'> 
 									<div id='zdjecie' class='nailthumb-container square-thumb'>
 										<img src='zdjecia/$A/$plik' />
 									</div>
@@ -86,10 +84,7 @@
 				?>
 				</div>
 			</div>
-			<div id="content>
-			
-			<div>
 		</div>
-		
+		<script type="text/javascript" src="js/lightbox.js"></script>
 	</body>
 </html>
