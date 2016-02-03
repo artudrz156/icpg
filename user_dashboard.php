@@ -54,12 +54,6 @@
 							}
 							closedir($foldery);
 						?>
-						<li><a href='index.php'>Strona główna</a></li>
-						<li><a href='index.php'>Strona główna</a></li>
-						<li><a href='index.php'>Strona główna</a></li>
-						<li><a href='index.php'>Strona główna</a></li>
-						<li><a href='index.php'>Strona główna</a></li>
-						<li><a href='index.php'>Strona główna</a></li>
 					</ul>
 				</div>
 				<div id="center-zawartosc">

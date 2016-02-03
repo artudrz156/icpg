@@ -80,7 +80,6 @@ input[type="email"]:{
 }
 
 #main-user-gallery {
-	border: 1px solid #000;
 	min-width: 800px;
 }
 
@@ -103,43 +102,44 @@ input[type="email"]:{
 	overflow: hidden;
 	min-height: 100px;
 	border-bottom: 1px solid #396A92;
+	background-color: #E0E0EA;
 }
 
 #menu {
 	float: left;
 	width: 140px;
 	height: auto;
-	color: #888;
-	margin: 0px;
+	color: #221526;
+	padding-right: 50px;
 	overflow: hidden;
-	border: 1px solid #000;
-	padding: 0 20px 0 20px;
+	border-right: 1px solid #396A92;
 }
 
 #menu ul, ul li {
 	display: block;
-	float: left;
 	margin: 0;
 	padding: 0;
-    list-style-type: none;
+    list-style-type: none;  	
 }
 
-#menu ul a:link, ul a:visited {
+#menu ul a:link, ul a:visited {	
 	text-decoration: none;
-	border: 1px solid #666666;
+	background-color: #396A92;
 	display: block;
-	width: 120px;
-	text-align: center;
-	color: #888;
-	padding: 5px;
-	margin: 0 1px 1px 0;
+	margin: 1px;	
+	font-family: sans-serif;
+	font-size: 14px;
+	appearance: none;
+	box-shadow: none;
+	border-radius: none;  
+	padding: 15px;
+	color: #E0E0EA;
 }
 
 #menu ul a:hover {
-	color: #888;
-	border: 1px solid #666666;
-	padding: 5px;
-	margin: 0 1px 1px 0;
+	background-color: #E0E0EA;
+	transition: box-shadow 0.3s, background-color 0.3s;
+	color: #221526;
 }
 
 #zdjecie {
@@ -151,7 +151,6 @@ input[type="email"]:{
 #center-zawartosc {
 	margin: 0 auto;
 	overflow: hidden;
-	border: 1px solid #000;
 	width: 75%;
 }
 
@@ -160,7 +159,6 @@ input[type="email"]:{
 	overflow: hidden;
 	padding: 5px;
 	margin: 0;
-	border: 1px solid #fff;
 }
 
 #zawartosc a:link , a:visited{
@@ -172,134 +170,9 @@ input[type="email"]:{
 	text-decoration: underline;
 }
 
-*
-{
- margin:0;
- padding:0;
-}
-#login-form
-{
- margin-top:70px;
-}
-table
-{
- border:solid #dcdcdc 1px;
- padding:25px;
- box-shadow: 0px 0px 1px rgba(0,0,0,0.2);
-}
-table tr,td
-{
- padding:15px;
- //border:solid #e1e1e1 1px;
-}
-table tr td input
-{
- width:97%;
- height:45px;
- border:solid #e1e1e1 1px;
- border-radius:3px;
- padding-left:10px;
- font-family:Verdana, Geneva, sans-serif;
- font-size:16px;
- background:#f9f9f9;
- transition-duration:0.5s;
- box-shadow: inset 0px 0px 1px rgba(0,0,0,0.4);
-}
 
-table tr td button
-{
- width:100%;
- height:45px;
- border:0px;
- background:rgba(12,45,78,11);
- background:-moz-linear-gradient(top, #595959 , #515151);
- border-radius:3px;
- box-shadow: 1px 1px 1px rgba(1,0,0,0.2);
- color:#f9f9f9;
- font-family:Verdana, Geneva, sans-serif;
- font-size:18px;
- font-weight:bolder;
- text-transform:uppercase;
-}
-table tr td button:active
-{
- position:relative;
- top:1px;
-}
-table tr td a
-{
- text-decoration:none;
- color:#00a2d1;
- font-family:Verdana, Geneva, sans-serif;
- font-size:18px;
-}
 
-/* Wobble To Bottom Right */
-@-webkit-keyframes hvr-wobble-to-bottom-right {
-  16.65% {
-    -webkit-transform: translate(8px, 8px);
-    transform: translate(8px, 8px);
-  }
-
-  33.3% {
-    -webkit-transform: translate(-6px, -6px);
-    transform: translate(-6px, -6px);
-  }
-
-  49.95% {
-    -webkit-transform: translate(4px, 4px);
-    transform: translate(4px, 4px);
-  }
-
-  66.6% {
-    -webkit-transform: translate(-2px, -2px);
-    transform: translate(-2px, -2px);
-  }
-
-  83.25% {
-    -webkit-transform: translate(1px, 1px);
-    transform: translate(1px, 1px);
-  }
-
-  100% {
-    -webkit-transform: translate(0, 0);
-    transform: translate(0, 0);
-  }
-}
-
-@keyframes hvr-wobble-to-bottom-right {
-  16.65% {
-    -webkit-transform: translate(8px, 8px);
-    transform: translate(8px, 8px);
-  }
-
-  33.3% {
-    -webkit-transform: translate(-6px, -6px);
-    transform: translate(-6px, -6px);
-  }
-
-  49.95% {
-    -webkit-transform: translate(4px, 4px);
-    transform: translate(4px, 4px);
-  }
-
-  66.6% {
-    -webkit-transform: translate(-2px, -2px);
-    transform: translate(-2px, -2px);
-  }
-
-  83.25% {
-    -webkit-transform: translate(1px, 1px);
-    transform: translate(1px, 1px);
-  }
-
-  100% {
-    -webkit-transform: translate(0, 0);
-    transform: translate(0, 0);
-  }
-}
-
-.hvr-wobble-to-bottom-right {
+.hvr-bounce-to-bottom {
   display: inline-block;
   vertical-align: middle;
   -webkit-transform: translateZ(0);
@@ -308,14 +181,38 @@ table tr td a
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  -webkit-transition-property: color;
+  transition-property: color;
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
 }
-.hvr-wobble-to-bottom-right:hover, .hvr-wobble-to-bottom-right:focus, .hvr-wobble-to-bottom-right:active {
-  -webkit-animation-name: hvr-wobble-to-bottom-right;
-  animation-name: hvr-wobble-to-bottom-right;
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-timing-function: ease-in-out;
-  animation-timing-function: ease-in-out;
-  -webkit-animation-iteration-count: 1;
-  animation-iteration-count: 1;
+.hvr-bounce-to-bottom:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #2098d1;
+  -webkit-transform: scaleY(0);
+  transform: scaleY(0);
+  -webkit-transform-origin: 50% 0;
+  transform-origin: 50% 0;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+.hvr-bounce-to-bottom:hover, .hvr-bounce-to-bottom:focus, .hvr-bounce-to-bottom:active {
+  color: white;
+}
+.hvr-bounce-to-bottom:hover:before, .hvr-bounce-to-bottom:focus:before, .hvr-bounce-to-bottom:active:before {
+  -webkit-transform: scaleY(1);
+  transform: scaleY(1);
+  -webkit-transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+  transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
 }
