@@ -35,47 +35,63 @@
 				<div id="header">				
 					<div id="mainHeader">
 						<h1>Gallery</h1>
-					</div>				
+					</div>		
+					<span><a href="upload.php">Upload</a></span>
 				</div>
 			</div>
 			<div id="zawartosc">
 				<div id="menu">
-					<h2>MENU</h2>
+					<h2>Categories</h2>
 					<ul>
-						<?php	
-							if ($foldery = opendir('zdjecia/')) {
-								while (($dir = readdir($foldery))!=false) { 
-									if(!ereg(".gif$|.jpg$", $dir)) {
-										if ($dir != "." && $dir != "..") {	
-											echo "<li><a href='user_dashboard.php?name=$dir'>$dir</a></li>";
-										}
-									}
-								}
+					<?php
+						include_once 'dbconnect.php';
+						$sql="SELECT * FROM category WHERE id_user=".$_SESSION['id'];
+						$result = mysqli_query($con, $sql);	
+						if($result->num_rows > 0) {
+							while($row = $result->fetch_assoc()) {
+								$categoryId = $row['id'];
+								$categoryName = $row['name'];
+								echo "<li><a href='user_dashboard.php?id=$categoryId'>$categoryName</a></li>";
 							}
-							closedir($foldery);
-						?>
+						} else {
+							$message = "Invalid user id!";
+						}
+					?>
 					</ul>
 				</div>
 				<div id="center-zawartosc">
-				<?php
-					$A = null;
-					if (isset($_GET['name'])) {
-						$A = $_GET['name'];
-					
-						echo "<h2>$A</h2>";										
-						if ($obrazy = opendir('zdjecia/'.$A.'/')) {
-							while (($plik = readdir($obrazy))!= false) {
-								if(ereg(".gif$|.jpg$", $plik)) {		
-									echo "<a href='zdjecia/$A/$plik' data-lightbox='$A'> 
-										<div id='zdjecie' class='nailthumb-container square-thumb'>
-											<img src='zdjecia/$A/$plik' />
-										</div>
-									</a>";
-								}	
-							}
-							closedir($obrazy);	
-						}
-					}			
+				<?php					
+					$categoryId = null;
+					if (isset($_GET['id'])) {
+						include_once 'dbconnect.php';
+						$categoryId = $_GET['id'];
+						$sql="select * from category where id=".$categoryId;
+						$result = mysqli_query($con, $sql);
+						$row = mysqli_fetch_array($result);
+						$categoryName = $row['name'];
+						if ($categoryName != null)
+						{
+							echo "<h2>$categoryName</h2>";
+							$sql="SELECT * FROM photos WHERE user_id=".$_SESSION['id']." and category_name='".$categoryName."'";							
+							$result = mysqli_query($con, $sql);	
+							if($result->num_rows > 0) {
+								while($row = $result->fetch_assoc()) {
+									$comment = $row['comment'];
+									$filePath = $row['file_path'];
+									$dateTime = $row['date_time'];
+									$categoryName = $row['category_name'];
+									echo "<a href='$filePath' data-lightbox='$categoryName'> 
+											<div id='zdjecie' class='nailthumb-container square-thumb'>
+												<img src='$filePath' />
+											</div>
+										</a>";
+								}
+							}		
+						}							
+					} else {
+						$message = "Invalid category id!";
+					}
+					$con->close();				
 				?>
 				</div>
 			</div>

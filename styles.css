@@ -5,6 +5,17 @@ body {
 	font-size: 12px;
 	background-color: #221526;
 }
+a {
+	color: #396A92;
+}
+
+a:link, a:visited {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
 
 h1 {
 	margin: 20px 0px 10px 20px;
@@ -114,7 +125,7 @@ input[type="email"]:{
 	float: left;
 	width: 20%;
 	height: auto;
-	color: #221526;
+	color: #396A92;
 	overflow: hidden;
 }
 
