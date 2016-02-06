@@ -3,36 +3,45 @@
 	include_once 'dbconnect.php';
 ?>
 <html>
+	<head>
+		<title>Upload</title>
+		<link rel="stylesheet" type="text/css" href="styles.css" />
+	</head>
 <body>
 
 <form action="upload.php" method="post" enctype="multipart/form-data">
-    Select image to upload:
-    <input type="file" name="fileToUpload" id="fileToUpload" />
-	<input type="text" name="comment" id="comment" />
-	<select name="category">
-	<?php
-	
-	$sql="SELECT * FROM category WHERE id_user=".$_SESSION['id'] ;
-	$result = mysqli_query($con, $sql);	
-	if($result->num_rows > 0) {
-		while($row = $result->fetch_assoc()) {
-			$categoryId = $row['id'];
-			$categoryName = $row['name'];
-			echo '<option value="'.$categoryId.'">'.$categoryName.'</option>';
+	<div class="loginform input-list style-1 clearfix">
+		<h2>Upload photo</h2>
+		File:
+		<input type="file" name="fileToUpload" id="fileToUpload" required /><br />
+		Comment:		
+		<input type="text" name="comment" id="comment" /><br />
+		Category:
+		<select name="category">
+		<?php		
+		$sql="SELECT * FROM category WHERE id_user=".$_SESSION['id'] ;
+		$result = mysqli_query($con, $sql);	
+		if($result->num_rows > 0) {
+			while($row = $result->fetch_assoc()) {
+				$categoryId = $row['id'];
+				$categoryName = $row['name'];
+				echo '<option value="'.$categoryId.'">'.$categoryName.'</option>';
+			}
+		} else {
+			$message = "Invalid user id!";
 		}
-	} else {
-		$message = "Invalid user id!";
-	}
-	?>
-	</select>
-    <input type="submit" value="Upload Image" name="submit" />
+		?>
+		</select><br />
+		<input type="submit" value="Upload Image" name="submit" />
+		<p><a href="user_dashboard.php">Go back</a></p>	 
+	</div>
 </form>
 
 </body>
 </html> 
 
 <?php
-if(isset($_POST['submit']))
+if(isset($_POST['submit']) )
 {
 	$target_dir = "uploads/".$_SESSION['username'];
 	$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
@@ -77,18 +86,17 @@ if(isset($_POST['submit']))
 				$comment = $_POST["comment"];
 			}
 			$dateTime = date('Y-m-d H:i:s');
-			$categoryName = "Undefined";
-			
-			$sql = "INSERT INTO photos(user_id, file_path, comment, date_time, category_name) 
-					VALUES(".$_SESSION['id'].", '".$target_file."', '".$comment."', '".$dateTime."', '".$categoryName."')";
+			$categoryId = 1;
+			if(isset($_POST['category']))
+			{
+				$categoryId = $_POST['category'];
+			}
+			$sql = "INSERT INTO photos(user_id, file_path, comment, date_time, category_id) 
+					VALUES(".$_SESSION['id'].", '".$target_file."', '".$comment."', '".$dateTime."', ".$categoryId.")";
 			
 			if(mysqli_query($con, $sql))
 			{				
 				echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-				$categoryId = 1;
-				if(isset($_POST['category'])){
-					$categoryId = $_POST['category'];
-				}
 				echo "<p><a href='user_dashboard.php?id=$categoryId'>Go back</a></p>";
 			}
 			else

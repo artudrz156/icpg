@@ -32,7 +32,9 @@ ul , ul li {
 }
 
 input[type="text"], 
-input[type="password"]{
+input[type="password"],
+input[type="file"],
+input[type="email"]{
   display: block;
   margin: 0 auto 5px auto;
   width: 100%;
@@ -43,7 +45,7 @@ input[type="password"]{
   border-radius: none;  
 }
 
-input[type="submit"] {
+input[type="submit"]{
 	display: block;
 	float: right;
 	margin: 0;	
@@ -56,20 +58,22 @@ input[type="submit"] {
 	border: solid 2px #396A92;
 }
 
-input[type="submit"]:hover {
+input[type="submit"]:hover{
 	border: solid 2px #221526;
 	transition: box-shadow 0.3s, border 0.3s;
 }
 
 input[type="text"]:focus,
 input[type="password"]:focus ,
-input[type="email"]:{
+input[type="email"]:focus{
   outline: none;
 }
 
 .style-1 input[type="text"],
 .style-1 input[type="password"],
-.style-1 input[type="email"] {
+.style-1 input[type="email"],
+.style-1 input[type="file"],
+.style-1 select{
   padding: 10px;
   border: solid 1px #396A92;
   transition: box-shadow 0.3s, border 0.3s;
@@ -79,7 +83,9 @@ input[type="email"]:{
 .style-1 input[type="password"]:focus,
 .style-1 input[type="password"].focus ,
 .style-1 input[type="email"]:focus,
-.style-1 input[type="email"].focus {
+.style-1 input[type="email"].focus ,
+.style-1 input[type="file"]:focus,
+.style-1 select:focus {
   border: solid 1px #707070;
   box-shadow: 0 0 2px 1px #221526;
 }
@@ -93,6 +99,19 @@ input[type="email"]:{
 	padding: 20px 50px 20px 50px;
 	border: 1px solid #9AB4CB;
 	box-shadow: 0px 0px 5px #000;
+
+}
+.loginform h2 {
+	color: #221526;
+}
+
+#createCategoryLink  a:link, a:visited{
+	text-decoration: none;
+	text-align: left;
+	margin-top: 5px;
+}
+#createCategoryLink  a:hover {
+	text-decoration: underline;
 }
 
 #main-user-gallery {
@@ -114,11 +133,18 @@ input[type="email"]:{
 	border-bottom: 1px solid #396A92;
 }
 
+
 #top {
 	overflow: hidden;
 	min-height: 100px;
 	border-bottom: 1px solid #396A92;
 	background-color: #E0E0EA;
+}
+
+#verticalMenu {
+	overflow: hidden;
+	padding: 2px;
+	margin-right: 5px;
 }
 
 #menu {
@@ -135,8 +161,31 @@ input[type="email"]:{
 	padding: 0;
     list-style-type: none;  	
 }
+.uploadButton {
+	float: right;
+	text-align: center;
+}
+.uploadButton a:link, .uploadButton a:visited {
+	text-decoration: none;
+	background-color: #E0E0EA;
+	display: block;
+	margin: 1px;	
+	font-family: sans-serif;
+	font-size: 14px;
+	appearance: none;
+	box-shadow: none;
+	border-radius: none;  
+	padding: 10px;
+	color: #221526;
+}
+.uploadButton a:hover {
+	background-color: #396A92;
+	text-decoration: none;
+	transition: box-shadow 0.3s, background-color 0.3s;
+	color: #E0E0EA;
+}
 
-#menu ul a:link, ul a:visited {	
+#menu ul a:link, ul a:visited  {	
 	text-decoration: none;
 	background-color: #E0E0EA;
 	display: block;
@@ -152,6 +201,7 @@ input[type="email"]:{
 
 #menu ul a:hover {
 	background-color: #396A92;
+	text-decoration: none;
 	transition: box-shadow 0.3s, background-color 0.3s;
 	color: #E0E0EA;
 }
@@ -174,17 +224,6 @@ input[type="email"]:{
 	padding: 5px;
 	margin: 0;
 }
-
-#zawartosc a:link , a:visited{
-	color: #000;
-}
-
-#zawartosc a:hover {
-	color: #888;
-	text-decoration: underline;
-}
-
-
 
 .hvr-bounce-to-bottom {
   display: inline-block;

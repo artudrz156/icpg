@@ -30,14 +30,16 @@
 					}
 				?>
 			</div>
-			<div id="top">
-				
+			<div id="top">				
 				<div id="header">				
 					<div id="mainHeader">
 						<h1>Gallery</h1>
-					</div>		
-					<span><a href="upload.php">Upload</a></span>
-				</div>
+					</div>				
+					
+				</div>			
+			</div>
+			<div id="verticalMenu">
+				<span class="uploadButton"><a href="upload.php">Upload</a></span>		
 			</div>
 			<div id="zawartosc">
 				<div id="menu">
@@ -58,41 +60,50 @@
 						}
 					?>
 					</ul>
-				</div>
+					<span id="createCategoryLink"><a href="createCategory.php">Create category</a></span>
+				</div>				
 				<div id="center-zawartosc">
-				<?php					
+					
+				<?php	
+					include_once 'dbconnect.php';				
 					$categoryId = null;
-					if (isset($_GET['id'])) {
-						include_once 'dbconnect.php';
-						$categoryId = $_GET['id'];
-						$sql="select * from category where id=".$categoryId;
+					if(!isset($_GET['id'])) {
+						$sql = "SELECT * FROM category LIMIT 1";
 						$result = mysqli_query($con, $sql);
-						$row = mysqli_fetch_array($result);
-						$categoryName = $row['name'];
-						if ($categoryName != null)
-						{
-							echo "<h2>$categoryName</h2>";
-							$sql="SELECT * FROM photos WHERE user_id=".$_SESSION['id']." and category_name='".$categoryName."'";							
-							$result = mysqli_query($con, $sql);	
-							if($result->num_rows > 0) {
-								while($row = $result->fetch_assoc()) {
-									$comment = $row['comment'];
-									$filePath = $row['file_path'];
-									$dateTime = $row['date_time'];
-									$categoryName = $row['category_name'];
-									echo "<a href='$filePath' data-lightbox='$categoryName'> 
-											<div id='zdjecie' class='nailthumb-container square-thumb'>
-												<img src='$filePath' />
-											</div>
-										</a>";
-								}
-							}		
-						}							
-					} else {
-						$message = "Invalid category id!";
+						if($result->num_rows > 0) {
+							$row = $result->fetch_assoc();
+							$categoryId = $row['id'];
+						}
 					}
+					else {						
+						$categoryId = $_GET['id'];
+					}
+					$sql="select * from category where id=".$categoryId;
+					$result = mysqli_query($con, $sql);
+					$row = mysqli_fetch_array($result);
+					$categoryName = $row['name'];
+					if ($categoryName != null)
+					{
+						echo "<h2>$categoryName</h2>";
+						$sql="SELECT * FROM photos WHERE user_id=".$_SESSION['id']." and category_id=".$categoryId;							
+						$result = mysqli_query($con, $sql);	
+						if($result->num_rows > 0) {
+							while($row = $result->fetch_assoc()) {
+								$comment = $row['comment'];
+								$filePath = $row['file_path'];
+								$dateTime = $row['date_time'];
+								echo "<a href='$filePath' data-lightbox='$categoryName'> 
+										<div id='zdjecie' class='nailthumb-container square-thumb'>
+											<img src='$filePath' />
+										</div>
+									</a>";
+							}
+						}		
+					}							
+					
 					$con->close();				
 				?>
+					
 				</div>
 			</div>
 		</div>
