@@ -17,7 +17,9 @@
         jQuery(document).ready(function() {
             jQuery('.nailthumb-container').nailthumb({width:200,height:200});
         });
+		
 		</script>
+
 	</head>
 	<body>
 		<div id="main-user-gallery">			
@@ -92,11 +94,19 @@
 								$comment = $row['comment'];
 								$filePath = $row['file_path'];
 								$dateTime = $row['date_time'];
-								echo "<a href='$filePath' data-lightbox='$categoryName'> 
-										<div id='zdjecie' class='nailthumb-container square-thumb'>
-											<img src='$filePath' />
-										</div>
-									</a>";
+								
+								if (!file_exists($filePath)) {
+									$sql="delete from photos where id=".$row['id'];
+									mysqli_query($con, $sql);
+									
+								}
+								else {
+									echo "<a href='$filePath' data-lightbox='$categoryName'> 
+											<div id='zdjecie' class='nailthumb-container square-thumb' >
+												<img src='$filePath' id='miniaturka'/>	
+											</div>
+										</a>";
+								}
 							}
 						}		
 					}							
@@ -108,5 +118,10 @@
 			</div>
 		</div>
 		<script type="text/javascript" src="js/lightbox.js"></script>
+		<script type="text/javascript">
+		jQuery("img").error(function(){
+			$(this).hide();
+		});
+		</script>
 	</body>
 </html>

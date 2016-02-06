@@ -43,7 +43,11 @@
 <?php
 if(isset($_POST['submit']) )
 {
-	$target_dir = "uploads/".$_SESSION['username'];
+	$target_dir = "uploads/".$_SESSION['username']."/";
+	echo $target_dir;
+	if (!is_dir($target_dir) && !mkdir($target_dir)){
+	  die("Error creating folder $target_dir");
+	}
 	$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 	$uploadOk = 1;
 	$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
