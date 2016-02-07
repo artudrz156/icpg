@@ -8,35 +8,60 @@
 		<link rel="stylesheet" type="text/css" href="styles.css" />
 	</head>
 <body>
-
-<form action="upload.php" method="post" enctype="multipart/form-data">
-	<div class="loginform input-list style-1 clearfix">
-		<h2>Upload photo</h2>
-		File:
-		<input type="file" name="fileToUpload" id="fileToUpload" required /><br />
-		Comment:		
-		<input type="text" name="comment" id="comment" /><br />
-		Category:
-		<select name="category">
-		<?php		
-		$sql="SELECT * FROM category WHERE id_user=".$_SESSION['id'] ;
-		$result = mysqli_query($con, $sql);	
-		if($result->num_rows > 0) {
-			while($row = $result->fetch_assoc()) {
-				$categoryId = $row['id'];
-				$categoryName = $row['name'];
-				echo '<option value="'.$categoryId.'">'.$categoryName.'</option>';
-			}
-		} else {
-			$message = "Invalid user id!";
-		}
+	<div id="heheszkidiv" class="flipdiv180">
+		<?php
+		include('topHeader.php');
 		?>
-		</select><br />
-		<input type="submit" value="Upload Image" name="submit" />
-		<p><a href="user_dashboard.php">Go back</a></p>	 
+		
+		<div style="height: 100%;">
+			<form action="upload.php" method="post" enctype="multipart/form-data">
+				<div class="loginform input-list style-1 clearfix">
+					<h2>Upload photo</h2>
+					File:
+					<input type="file" name="fileToUpload" id="fileToUpload" required /><br />
+					Comment:		
+					<input type="text" name="comment" id="comment" /><br />
+					Category:
+					<select name="category">
+					<?php		
+					$sql="SELECT * FROM category WHERE id_user=".$_SESSION['id'] ;
+					$result = mysqli_query($con, $sql);	
+					if($result->num_rows > 0) {
+						while($row = $result->fetch_assoc()) {
+							$categoryId = $row['id'];
+							$categoryName = $row['name'];
+							echo '<option value="'.$categoryId.'">'.$categoryName.'</option>';
+						}
+					} else {
+						$message = "Invalid user id!";
+					}
+					?>
+					</select><br />
+					<input type="submit" value="Upload Image" name="submit" />
+					<p><a href="user_dashboard.php">Go back</a></p>	 
+				</div>
+			</form>
+		</div>
 	</div>
-</form>
-
+	<script type="text/javascript">
+	function changediv()
+	{	
+		if (document.getElementById("heheszkidiv")) {         
+			document.getElementById("heheszkidiv").setAttribute("class", "");
+			document.getElementById("heheszkidiv").setAttribute("id", "normaldiv");
+		}
+		else {     
+			document.getElementById("normaldiv").setAttribute("class", "flipdiv180");
+			document.getElementById("normaldiv").setAttribute("id", "heheszkidiv");
+		}
+	}
+	</script>
+	<script type="text/javascript">
+		window.onload = scrollDownToTheTop;
+		function scrollDownToTheTop() {
+		window.scrollTo(0, document.body.scrollHeight);
+		}
+		</script>
 </body>
 </html> 
 
@@ -99,9 +124,10 @@ if(isset($_POST['submit']) )
 					VALUES(".$_SESSION['id'].", '".$target_file."', '".$comment."', '".$dateTime."', ".$categoryId.")";
 			
 			if(mysqli_query($con, $sql))
-			{				
-				echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-				echo "<p><a href='user_dashboard.php?id=$categoryId'>Go back</a></p>";
+			{	
+				header("Location:user_dashboard.php?id=$categoryId");
+				#echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+				#echo "<p><a href='user_dashboard.php?id=$categoryId'>Go back</a></p>";
 			}
 			else
 			{

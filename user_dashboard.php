@@ -15,33 +15,21 @@
 				
 		<script type="text/javascript">
         jQuery(document).ready(function() {
-            jQuery('.nailthumb-container').nailthumb({width:200,height:200});
-        });
-		
+            jQuery('.nailthumb-container').nailthumb({width:300,height:300});
+        });		
 		</script>
-
 	</head>
 	<body>
+	<div id="heheszkidiv" class="flipdiv180">
 		<div id="main-user-gallery">			
-			<div id="user-details">
-				<?php
-					if($_SESSION["username"]) {
-				?>
-					Welcome <?php echo $_SESSION["username"]; ?> | <a href="logout.php" tite="Logout">Logout</a>
-				<?php
-					}
-				?>
-			</div>
-			<div id="top">				
-				<div id="header">				
-					<div id="mainHeader">
-						<h1>Gallery</h1>
-					</div>				
-					
-				</div>			
-			</div>
+			<?php
+			include('topHeader.php');
+			?>
 			<div id="verticalMenu">
-				<span class="uploadButton"><a href="upload.php">Upload</a></span>		
+				<span class="uploadButton">
+					<a href="upload.php">Upload</a>
+					
+				</span>		
 			</div>
 			<div id="zawartosc">
 				<div id="menu">
@@ -102,20 +90,21 @@
 								}
 								else {
 									echo "<a href='$filePath' data-lightbox='$categoryName'> 
-											<div id='zdjecie' class='nailthumb-container square-thumb' >
-												<img src='$filePath' id='miniaturka'/>	
+											<div id='zdjecie' class='nailthumb-container square-thumb nailthumb-image-titles-animated-onhover' >
+												<img src='$filePath' id='miniaturka' title='$comment'/>	
 											</div>
 										</a>";
 								}
 							}
 						}		
 					}							
-					
+					#nailthumb-container square-thumb
 					$con->close();				
 				?>
 					
 				</div>
 			</div>
+		</div>
 		</div>
 		<script type="text/javascript" src="js/lightbox.js"></script>
 		<script type="text/javascript">
@@ -123,5 +112,25 @@
 			$(this).hide();
 		});
 		</script>
+		<script type="text/javascript">
+		window.onload = scrollDownToTheTop;
+		function scrollDownToTheTop() {
+		window.scrollTo(0, document.body.scrollHeight);
+		}
+		</script>
+		<script type="text/javascript">
+		function changediv()
+		{	
+			if (document.getElementById("heheszkidiv")) {         
+				document.getElementById("heheszkidiv").setAttribute("class", "");
+				document.getElementById("heheszkidiv").setAttribute("id", "normaldiv");
+			}
+			else {     
+				document.getElementById("normaldiv").setAttribute("class", "flipdiv180");
+				document.getElementById("normaldiv").setAttribute("id", "heheszkidiv");
+			}
+		}
+		</script>
+		
 	</body>
 </html>

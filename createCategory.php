@@ -8,17 +8,44 @@ session_start();
 		<link rel="stylesheet" type="text/css" href="styles.css" />
 	</head>
 	<body>
-		<form name="formCategory" method="post" action="">			
-			<div class="loginform input-list style-1 clearfix">
-				<h2>Create category</h2>
-				<input type="text" placeholder="Category name" name="categoryName" required />	
-				<p>
-					<input type="submit" name="create" value="Create" />
-				</p>
-				<span><a href="index.php">Go back</a></span>
-			</div>
+		<div id="heheszkidiv" class="flipdiv180">
+			<?php
+			include('topHeader.php');
+			?>
 			
-		</form>
+			<div style="min-height:480px;">
+				<form name="formCategory" method="post" action="">			
+					<div class="loginform input-list style-1 clearfix" >
+						<h2>Create category</h2>
+						<input type="text" placeholder="Category name" name="categoryName" required />	
+						<p>
+							<input type="submit" name="create" value="Create" />
+						</p>
+						<span><a href="index.php">Go back</a></span>
+					</div>
+					
+				</form>
+			</div>
+		</div>
+		<script type="text/javascript">
+	function changediv()
+	{	
+		if (document.getElementById("heheszkidiv")) {         
+			document.getElementById("heheszkidiv").setAttribute("class", "");
+			document.getElementById("heheszkidiv").setAttribute("id", "normaldiv");
+		}
+		else {     
+			document.getElementById("normaldiv").setAttribute("class", "flipdiv180");
+			document.getElementById("normaldiv").setAttribute("id", "heheszkidiv");
+		}
+	}
+	</script>
+	<script type="text/javascript">
+		window.onload = scrollDownToTheTop;
+		function scrollDownToTheTop() {
+		window.scrollTo(0, document.body.scrollHeight);
+		}
+		</script>
 	</body>
 </html>
 <?php
